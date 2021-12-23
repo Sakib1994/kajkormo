@@ -20,6 +20,11 @@
             </div>
 
             <div class="mt-4">
+                <jet-label for="account_type" value="Account Type" />
+                <my-select :options="accountTypes" id="account_type" class="mt-1 block w-full" v-model="form.account_type" required/>
+            </div>
+
+            <div class="mt-4">
                 <jet-label for="password" value="Password" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
@@ -60,6 +65,7 @@
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
     import JetInput from '@/Jetstream/Input.vue'
+    import MySelect from '@/Components/Select.vue'
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
@@ -76,6 +82,7 @@
             JetLabel,
             JetValidationErrors,
             Link,
+            MySelect
         },
 
         data() {
@@ -83,10 +90,15 @@
                 form: this.$inertia.form({
                     name: '',
                     email: '',
+                    account_type: '',
                     password: '',
                     password_confirmation: '',
                     terms: false,
-                })
+                }),
+                accountTypes:  [
+                    { text: 'Freelaner', value: 'freelaner' },
+                    { text: 'Buyer', value: 'buyer' }
+                ]
             }
         },
 
