@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Buyer;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -35,6 +36,10 @@ class CreateNewUser implements CreatesNewUsers
 
         if ($input['account_type'] == "buyer") {
             $user->attachRole('buyer');
+            Buyer::create([
+                'name' => $input['name'],
+                'user_id' => $user->id,
+            ]);
         } else {
             $user->attachRole('freelancer');
         }
